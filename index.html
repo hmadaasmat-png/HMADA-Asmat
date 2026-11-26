@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f4c81" />
+  <title>طلب استشارة أو صيانة - محمد عصمت (واتساب الأعمال)</title>
+  <style>
+    :root {
+      --primary: #0f4c81;
+      --primary-light: #1e6bb8;
+      --accent: #00897b;
+      --whatsapp-dark: #128c7e;
+      --bg: #f4f7fa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #d1d5db;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      padding: 20px 14px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 1.35rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.94;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 18px auto;
+      padding: 0 12px 40px;
+    }
+
+    .wa-banner {
+      background: #eef6ff;
+      border: 1px solid #cfe2ff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.12rem;
+      color: var(--primary);
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.88rem;
+      margin-bottom: 5px;
+      color: #374151;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      background: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 11px 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-whatsapp { background: var(--whatsapp-dark); color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: var(--text); }
+
+    .output-box {
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 14px;
+      white-space: pre-wrap;
+      font-size: 0.88rem;
+      color: #1e293b;
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111827;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>إرسال طلب استشارة أو صيانة - محمد عصمت</h1>
+    <p>التبريد والتكييف • غرف التبريد والتجميد • الغسالات الأوتوماتيك</p>
+  </header>
+
+  <div class="container">
+    <div class="wa-banner">
+      <div>
+        <strong style="color: var(--primary); font-size: 0.9rem;">📱 واتساب الأعمال المباشر:</strong>
+        <span dir="ltr" style="font-weight: 700;">01004549631</span>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <a href="https://wa.me/201004549631" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="min-width: auto; padding: 7px 12px; font-size: 0.84rem;">💬 فتح واتساب مباشرة</a>
+        <button type="button" class="btn btn-secondary" style="min-width: auto; padding: 7px 12px; font-size: 0.84rem;" onclick="copyDirectLink()">📋 نسخ الرابط</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>بيانات الطلب أو الاستشارة</h2>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="clientName">الاسم / الجهة</label>
+          <input type="text" id="clientName" placeholder="مثال: أ. محمود / منشأة تجارية" />
+        </div>
+        <div class="form-group">
+          <label for="equipType">نوع المعدة أو الخدمة</label>
+          <select id="equipType">
+            <option value="تكييف (سبليت / إنفرتر / شباك / فري ستاند)">تكييف (سبليت / إنفرتر / شباك / فري ستاند)</option>
+            <option value="تبريد وتجميد تجاري (ثلاجات عرض / ديب فريزر)">تبريد وتجميد تجاري (ثلاجات عرض / ديب فريزر)</option>
+            <option value="غرفة تبريد أو تجميد">غرفة تبريد أو تجميد</option>
+            <option value="غسالة أوتوماتيك">غسالة أوتوماتيك</option>
+            <option value="مراجعة مقايسة أو استشارة فنية">مراجعة مقايسة أو استشارة فنية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="brandModel">الماركة / الموديل / القدرة</label>
+          <input type="text" id="brandModel" placeholder="مثال: كاريير / سامسونج / إل جي / زانوسي" />
+        </div>
+        <div class="form-group">
+          <label for="codeOrReading">كود العطل أو القراءة الظاهرة (إن وجد)</label>
+          <input type="text" id="codeOrReading" placeholder="مثال: OE / 4E / E4 / ضعف تبريد" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="problemDesc">وصف المشكلة أو المطلوب</label>
+        <textarea id="problemDesc" placeholder="اكتب تفاصيل المشكلة أو المطلوب باختصار ووضوح..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" onclick="prepareSummary()">📄 تجهيز الرسالة</button>
+        <button type="button" class="btn btn-whatsapp" onclick="sendToWhatsApp()">💬 إرسال إلى واتساب الأعمال</button>
+        <button type="button" class="btn btn-secondary" onclick="clearForm()">مسح</button>
+      </div>
+
+      <div id="summaryBox" class="output-box"></div>
+      <div id="copyRow" class="btn-row" style="display: none;">
+        <button type="button" class="btn btn-accent" onclick="copySummary()">📋 نسخ نص الطلب</button>
+      </div>
+    </div>
+
+    <footer>
+      الرابط الأساسي لواتساب الأعمال: <span dir="ltr">https://wa.me/201004549631</span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">تم التنفيذ</div>
+
+  <script>
+    const WA_PHONE = '201004549631';
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 2400);
+    }
+
+    function buildSummary() {
+      var name = (document.getElementById('clientName').value || '').trim() || 'غير محدد';
+      var equip = document.getElementById('equipType').value;
+      var brand = (document.getElementById('brandModel').value || '').trim() || 'غير محدد';
+      var code = (document.getElementById('codeOrReading').value || '').trim() || '—';
+      var desc = (document.getElementById('problemDesc').value || '').trim() || 'يرجى التواصل بخصوص الحالة';
+
+      return '*طلب استشارة / صيانة فنية*
+' +
+             '• *الاسم / الجهة:* ' + name + '
+' +
+             '• *نوع المعدة/الخدمة:* ' + equip + '
+' +
+             '• *الماركة/القدرة:* ' + brand + '
+' +
+             '• *الكود أو القراءة:* ' + code + '
+' +
+             '• *التفاصيل:* ' + desc;
+    }
+
+    function prepareSummary() {
+      var txt = buildSummary();
+      var box = document.getElementById('summaryBox');
+      box.innerText = txt;
+      box.style.display = 'block';
+      document.getElementById('copyRow').style.display = 'flex';
+      showToast('تم تجهيز الرسالة ✅');
+    }
+
+    function sendToWhatsApp() {
+      var txt = buildSummary();
+      window.open('https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(txt), '_blank');
+    }
+
+    function copySummary() {
+      var txt = document.getElementById('summaryBox').innerText;
+      if (!txt) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function() {
+          showToast('تم نسخ نص الطلب ✅');
+        });
+      }
+    }
+
+    function copyDirectLink() {
+      var url = 'https://wa.me/' + WA_PHONE;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function() {
+          showToast('تم نسخ رابط واتساب الأعمال ✅');
+        });
+      }
+    }
+
+    function clearForm() {
+      ['clientName', 'brandModel', 'codeOrReading', 'problemDesc'].forEach(function(id) {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('summaryBox').style.display = 'none';
+      document.getElementById('copyRow').style.display = 'none';
+      showToast('تم مسح البيانات');
+    }
+  </script>
+</body>
+</html>
